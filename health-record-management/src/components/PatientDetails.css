@@ -2,16 +2,17 @@
 
 .patient-details-container {
     max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 20px;
+    color: #8b0000; /* Maroon color for the title */
 }
 
 .patient-info {
@@ -19,12 +20,17 @@ h1 {
 }
 
 button {
-    padding: 8px 20px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+    background-color: #8b0000; /* Maroon color for the button */
+    color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #660000; /* Darker maroon color on hover */
 }
 
 .update-form {
@@ -33,21 +39,29 @@ button {
 
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    color: #8b0000; /* Maroon color for labels */
 }
 
 input[type="text"],
 input[type="email"],
 input[type="number"] {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #8b0000; /* Maroon color border for inputs */
     border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+    border-color: #660000; /* Darker maroon color on input focus */
 }
 
 button[type="submit"] {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .medical-history-list {
@@ -58,9 +72,10 @@ button[type="submit"] {
 .loading {
     text-align: center;
     font-style: italic;
+    color: #8b0000; /* Maroon color for loading text */
 }
 
 .error {
-    color: red;
+    color: #8b0000; /* Maroon color for error messages */
     font-weight: bold;
 }

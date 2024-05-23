@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './AddPatient.css'; // Importing the CSS file
 
 const AddPatientWithHistory = () => {
     const [formData, setFormData] = useState({
@@ -56,6 +57,7 @@ const AddPatientWithHistory = () => {
             const response = await axios.post('http://localhost:7070/patients', formData);
             console.log('Patient added:', response.data);
             alert('Patient added successfully');
+            // Reset form data
             setFormData({
                 id: '',
                 name: '',
@@ -92,47 +94,44 @@ const AddPatientWithHistory = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-
-            </div>
+        <form onSubmit={handleSubmit} className="form-container">
+            <h1>Add Patient</h1>
             <div>
                 <label>ID: </label>
                 <input type="text" name="id" value={formData.id} onChange={handleChange} required />
             </div>
-            <br />
             <div>
                 <label>Name: </label>
                 <input type="text" name="name" value={formData.name} onChange={handleChange} required />
             </div>
-            <br />
             <div>
                 <label>Email: </label>
                 <input type="email" name="email" value={formData.email} onChange={handleChange} required />
             </div>
-            <br />
             <div>
                 <label>Age: </label>
                 <input type="number" name="age" value={formData.age} onChange={handleChange} required />
             </div>
-            <br />
             <div>
                 <label>Sex: </label>
                 <input type="text" name="sex" value={formData.sex} onChange={handleChange} required />
             </div>
-            <br />
             <div>
                 <h1>Medical History</h1>
+                <div className="medical-history">
                     {Object.keys(formData.medicalHistory).map((key) => (
                         <div key={key}>
-                            <label>{key.charAt(0).toUpperCase() + key.slice(1)}: </label>
-                            <input type="checkbox" name={key} checked={formData.medicalHistory[key]} onChange={handleChange} />
+                            <input
+                                type="checkbox"
+                                name={key}
+                                checked={formData.medicalHistory[key]}
+                                onChange={handleChange}
+                            />
+                            <label>{key.charAt(0).toUpperCase() + key.slice(1)}</label>
                         </div>
                     ))}
-            </div> 
-                
-        <br />
-
+                </div>
+            </div>
             <button type="submit">Add Patient</button>
         </form>
     );

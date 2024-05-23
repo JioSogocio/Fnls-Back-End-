@@ -1,4 +1,4 @@
-// src/components/PatientList.jsx
+// PatientList.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -44,8 +44,9 @@ const PatientList = () => {
                     placeholder="Search by name"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
                 />
-                <button onClick={handleSearch}>Search</button>
+                <button onClick={handleSearch} className="search-button">Search</button>
             </div>
             <div className="patient-list">
                 {patients.map(patient => (

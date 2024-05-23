@@ -1,0 +1,76 @@
+/* AddPatient.css */
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the form */
+    border: 1px solid #8b0000; /* Maroon border */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+    color: #8b0000; /* Maroon color for the headings */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #8b0000; /* Maroon color for the labels */
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #8b0000; /* Maroon border for the inputs */
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-container input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #8b0000; /* Maroon background for the button */
+    color: #ffffff; /* White color for the button text */
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #600000; /* Darker maroon on hover */
+}
+
+.form-container div {
+    margin-bottom: 15px;
+}
+
+.medical-history {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px 20px;
+}
+
+.medical-history div {
+    display: flex;
+    align-items: center;
+}
+
+.medical-history label {
+    margin: 0;
+    font-weight: normal;
+    color: #8b0000; /* Maroon color for the medical history labels */
+}
