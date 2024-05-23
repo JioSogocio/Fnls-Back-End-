@@ -1,9 +1,8 @@
 // src/components/PatientList.jsx
-import './PatientList.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import './PatientList.css'; // Importing the CSS file
 
 const PatientList = () => {
     const [patients, setPatients] = useState([]);
@@ -37,9 +36,9 @@ const PatientList = () => {
     };
 
     return (
-        <div>
+        <div className="patient-list-container">
             <h1>Patient List</h1>
-            <div>
+            <div className="search-container">
                 <input
                     type="text"
                     placeholder="Search by name"
@@ -48,14 +47,14 @@ const PatientList = () => {
                 />
                 <button onClick={handleSearch}>Search</button>
             </div>
-            <div>
+            <div className="patient-list">
                 {patients.map(patient => (
                     <div 
                         key={patient._id} 
                         onClick={() => handleClick(patient._id)} 
-                        style={{ cursor: 'pointer', padding: '10px', border: '1px solid #ccc', margin: '5px 0' }}
+                        className="patient-item"
                     >
-                        {patient.id} - {patient.name}
+                        <span>{patient.id}</span> - <span>{patient.name}</span>
                     </div>
                 ))}
             </div>

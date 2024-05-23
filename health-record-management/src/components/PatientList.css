@@ -1,48 +1,51 @@
 /* src/components/PatientList.css */
 
 .patient-list-container {
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
-.patient-list-heading {
+h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #4CAF50; /* Green */
 }
 
 .search-container {
     margin-bottom: 20px;
 }
 
-.search-input {
+input[type="text"] {
     padding: 8px;
-    border: 2px solid #4CAF50; /* Green */
+    border: 1px solid #ccc;
     border-radius: 5px;
-    width: 200px;
-    margin-right: 10px;
 }
 
-.search-button {
-    padding: 8px 16px;
-    background-color: #4CAF50; /* Green */
-    color: white;
+button {
+    padding: 8px 20px;
     border: none;
     border-radius: 5px;
+    background-color: #007bff;
+    color: white;
     cursor: pointer;
+}
+
+.patient-list {
+    display: grid;
+    grid-gap: 10px;
 }
 
 .patient-item {
+    cursor: pointer;
     padding: 10px;
     border: 1px solid #ccc;
-    margin-bottom: 5px;
-    cursor: pointer;
-    background-color: #f2f2f2; /* Light gray */
-    color: #333; /* Dark gray */
+    border-radius: 5px;
+    background-color: #fff;
 }
 
 .patient-item:hover {
-    background-color: #e0e0e0; /* Lighter gray on hover */
+    background-color: #f0f0f0;
 }

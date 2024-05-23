@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import './PatientDetails.css'; // Importing the CSS file
 
 const PatientDetails = () => {
     const { id } = useParams();
@@ -56,14 +57,14 @@ const PatientDetails = () => {
         });
     };
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+    if (loading) return <div className="loading">Loading...</div>;
+    if (error) return <div className="error">{error}</div>;
 
     return (
-        <div>
+        <div className="patient-details-container">
             <h1>Patient Details</h1>
             {patient && (
-                <div>
+                <div className="patient-info">
                     <p><strong>ID:</strong> {patient.id}</p>
                     <p><strong>Name:</strong> {patient.name}</p>
                     <p><strong>Email:</strong> {patient.email}</p>
@@ -72,7 +73,7 @@ const PatientDetails = () => {
                 </div>
             )}
             {showUpdateForm && (
-                <div>
+                <div className="update-form">
                     <h2>Update Patient Details</h2>
                     <form onSubmit={handleUpdate}>
                         <div>
@@ -93,7 +94,7 @@ const PatientDetails = () => {
             )}
             <h2>Medical History</h2>
             {medicalHistory ? (
-                <ul>
+                <ul className="medical-history-list">
                     {Object.entries(medicalHistory).map(([key, value]) => (
                         (typeof value === 'boolean' && value) && <li key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</li>
                     ))}
