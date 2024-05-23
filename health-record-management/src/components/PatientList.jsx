@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './PatientList.css';
+import 'src/components/PatientList.css';
 
 const PatientList = () => {
     const [patients, setPatients] = useState([]);
