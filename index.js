@@ -17,27 +17,33 @@ mongoose.connect('mongodb://localhost:27017/Patient')
         console.error('Error connecting to MongoDB', err);
     });
 
+// Example endpoint for creating a new patient with medical history
 app.post('/patients', async (req, res) => {
     try {
         const { id, name, email, age, sex, medicalHistory } = req.body;
+        
+        // Create a new patient
         const newPatient = new Patient({ id, name, email, age, sex });
         const savedPatient = await newPatient.save();
 
+        // Create a new medical history associated with the patient
         const newMedicalHistory = new MedicalHistory({
-            patientId: savedPatient._id,
+            patientId: savedPatient._id, // Associate with the patient
             ...medicalHistory
         });
         const savedMedicalHistory = await newMedicalHistory.save();
 
         res.status(201).json({
-            message: 'Successfully Added Data',
+            message: 'Patient and medical history created successfully',
             patient: savedPatient,
             medicalHistory: savedMedicalHistory
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        console.error('Error creating patient and medical history:', err);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 // Route to get all patients
 app.get('/patients', async (req, res) => {
@@ -55,6 +61,17 @@ app.get('/patients/search', async (req, res) => {
     try {
         const patients = await Patient.find({ name: new RegExp(name, 'i') }, 'id name');
         res.json(patients);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('/patients/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const patient = await Patient.findById(id);
+        const medicalHistory = await MedicalHistory.findOne({ patientId: id });
+        res.json({ patient, medicalHistory });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

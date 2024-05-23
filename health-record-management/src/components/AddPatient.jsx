@@ -1,4 +1,3 @@
-// src/components/AddPatientWithHistory.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -57,7 +56,6 @@ const AddPatientWithHistory = () => {
             const response = await axios.post('http://localhost:7070/patients', formData);
             console.log('Patient added:', response.data);
             alert('Patient added successfully');
-            // Clear the form after successful submission
             setFormData({
                 id: '',
                 name: '',
@@ -95,6 +93,9 @@ const AddPatientWithHistory = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <div>
+
+            </div>
             <div>
                 <label>ID: </label>
                 <input type="text" name="id" value={formData.id} onChange={handleChange} required />

@@ -1,10 +1,12 @@
 // src/components/PatientList.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const PatientList = () => {
     const [patients, setPatients] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchPatients();
@@ -28,6 +30,10 @@ const PatientList = () => {
         }
     };
 
+    const handleClick = (id) => {
+        navigate(`/patient-details/${id}`);
+    };
+
     return (
         <div>
             <h1>Patient List</h1>
@@ -40,11 +46,17 @@ const PatientList = () => {
                 />
                 <button onClick={handleSearch}>Search</button>
             </div>
-            <ul>
+            <div>
                 {patients.map(patient => (
-                    <li key={patient._id}>{patient.id} - {patient.name}</li>
+                    <div 
+                        key={patient._id} 
+                        onClick={() => handleClick(patient._id)} 
+                        style={{ cursor: 'pointer', padding: '10px', border: '1px solid #ccc', margin: '5px 0' }}
+                    >
+                        {patient.id} - {patient.name}
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };
