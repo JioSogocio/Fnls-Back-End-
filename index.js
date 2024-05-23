@@ -19,7 +19,7 @@ mongoose.connect('mongodb://localhost:27017/Patient')
 
 app.post('/patients', async (req, res) => {
     try {
-        const { id, name, email, age, sex, medicalHistory } = resq.body;
+        const { id, name, email, age, sex, medicalHistory } = req.body;
         
 
         const newPatient = new Patient({ id, name, email, age, sex });
