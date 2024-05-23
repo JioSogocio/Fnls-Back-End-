@@ -1,13 +1,19 @@
-
+// src/App.jsx
 import React from 'react';
-import AddPatient from './components/AddPatient';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AddPatientWithHistory from './components/AddPatient';
+import PatientList from './components/PatientList';
 
 function App() {
     return (
-        <div className="App">
-            <h1>Add New Patient</h1>
-            <AddPatient />
-        </div>
+        <Router>
+            <div className="App">
+                <Routes>
+                    <Route path="/" element={<AddPatientWithHistory />} />
+                    <Route path="/patient-list" element={<PatientList />} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 

@@ -1,9 +1,8 @@
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const { Patient, MedicalHistory } = require('./models/patient');
+const { Patient, MedicalHistory } = require('./models/patient'); // Ensure the path is correct
 
 const app = express();
 
@@ -35,6 +34,27 @@ app.post('/patients', async (req, res) => {
             patient: savedPatient,
             medicalHistory: savedMedicalHistory
         });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Route to get all patients
+app.get('/patients', async (req, res) => {
+    try {
+        const patients = await Patient.find({}, 'id name');
+        res.json(patients);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Route to search patients by name
+app.get('/patients/search', async (req, res) => {
+    const { name } = req.query;
+    try {
+        const patients = await Patient.find({ name: new RegExp(name, 'i') }, 'id name');
+        res.json(patients);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
