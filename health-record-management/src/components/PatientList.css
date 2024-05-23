@@ -10,6 +10,7 @@
 .patient-list-heading {
     font-size: 24px;
     margin-bottom: 20px;
+    color: #4CAF50; /* Green */
 }
 
 .search-container {
@@ -18,7 +19,7 @@
 
 .search-input {
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 2px solid #4CAF50; /* Green */
     border-radius: 5px;
     width: 200px;
     margin-right: 10px;
@@ -26,8 +27,8 @@
 
 .search-button {
     padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #4CAF50; /* Green */
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -38,8 +39,10 @@
     border: 1px solid #ccc;
     margin-bottom: 5px;
     cursor: pointer;
+    background-color: #f2f2f2; /* Light gray */
+    color: #333; /* Dark gray */
 }
 
 .patient-item:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0; /* Lighter gray on hover */
 }
