@@ -9,6 +9,12 @@ const PatientDetails = () => {
     const [medicalHistory, setMedicalHistory] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        age: ''
+    });
 
     useEffect(() => {
         const fetchPatientDetails = async () => {
@@ -16,6 +22,11 @@ const PatientDetails = () => {
                 const response = await axios.get(`http://localhost:7070/patients/${id}`);
                 setPatient(response.data.patient);
                 setMedicalHistory(response.data.medicalHistory);
+                setFormData({
+                    name: response.data.patient.name,
+                    email: response.data.patient.email,
+                    age: response.data.patient.age
+                });
                 setLoading(false);
             } catch (err) {
                 setError('Error fetching patient details');
@@ -26,6 +37,25 @@ const PatientDetails = () => {
         fetchPatientDetails();
     }, [id]);
 
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.put(`http://localhost:7070/patients/${id}`, formData);
+            setPatient(response.data.patient);
+            setShowUpdateForm(false);
+        } catch (err) {
+            console.error('Error updating patient details:', err);
+            // Handle error
+        }
+    };
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
 
@@ -33,13 +63,33 @@ const PatientDetails = () => {
         <div>
             <h1>Patient Details</h1>
             {patient && (
-                <>
+                <div>
                     <p><strong>ID:</strong> {patient.id}</p>
                     <p><strong>Name:</strong> {patient.name}</p>
                     <p><strong>Email:</strong> {patient.email}</p>
                     <p><strong>Age:</strong> {patient.age}</p>
-                    <p><strong>Sex:</strong> {patient.sex}</p>
-                </>
+                    <button onClick={() => setShowUpdateForm(true)}>Update Details</button>
+                </div>
+            )}
+            {showUpdateForm && (
+                <div>
+                    <h2>Update Patient Details</h2>
+                    <form onSubmit={handleUpdate}>
+                        <div>
+                            <label>Name:</label>
+                            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                        </div>
+                        <div>
+                            <label>Email:</label>
+                            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                        </div>
+                        <div>
+                            <label>Age:</label>
+                            <input type="number" name="age" value={formData.age} onChange={handleChange} required />
+                        </div>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
             )}
             <h2>Medical History</h2>
             {medicalHistory ? (
