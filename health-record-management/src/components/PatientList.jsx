@@ -1,8 +1,9 @@
 // src/components/PatientList.jsx
+import './PatientList.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './PatientList.css';
+
 
 const PatientList = () => {
     const [patients, setPatients] = useState([]);
