@@ -17,24 +17,22 @@ mongoose.connect('mongodb://localhost:27017/Patient')
         console.error('Error connecting to MongoDB', err);
     });
 
-// Example endpoint for creating a new patient with medical history
 app.post('/patients', async (req, res) => {
     try {
-        const { id, name, email, age, sex, medicalHistory } = req.body;
+        const { id, name, email, age, sex, medicalHistory } = resq.body;
         
-        // Create a new patient
+
         const newPatient = new Patient({ id, name, email, age, sex });
         const savedPatient = await newPatient.save();
 
-        // Create a new medical history associated with the patient
         const newMedicalHistory = new MedicalHistory({
-            patientId: savedPatient._id, // Associate with the patient
+            patientId: savedPatient._id, 
             ...medicalHistory
         });
         const savedMedicalHistory = await newMedicalHistory.save();
 
         res.status(201).json({
-            message: 'Patient and medical history created successfully',
+            message: 'Patient and medicalshistory created successfully',
             patient: savedPatient,
             medicalHistory: savedMedicalHistory
         });
@@ -45,7 +43,6 @@ app.post('/patients', async (req, res) => {
 });
 
 
-// Route to get all patients
 app.get('/patients', async (req, res) => {
     try {
         const patients = await Patient.find({}, 'id name');
@@ -55,7 +52,6 @@ app.get('/patients', async (req, res) => {
     }
 });
 
-// Route to search patients by name
 app.get('/patients/search', async (req, res) => {
     const { name } = req.query;
     try {
@@ -74,6 +70,28 @@ app.get('/patients/:id', async (req, res) => {
         res.json({ patient, medicalHistory });
     } catch (err) {
         res.status(500).json({ error: err.message });
+    }
+});
+
+app.put('/patients/:id', async (req, res) => {
+    const { id } = req.params;
+    const { name, email, age } = req.body;
+    
+    try {
+        const updatedPatient = await Patient.findByIdAndUpdate(
+            id,
+            { name, email, age },
+            { new: true }
+        );
+
+        if (!updatedPatient) {
+            return res.status(404).json({ error: 'Patient not found' });
+        }
+
+        res.json({ message: 'Patient details updated successfully', patient: updatedPatient });
+    } catch (err) {
+        console.error('Error updating patient details:', err);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
